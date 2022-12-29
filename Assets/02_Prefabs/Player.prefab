@@ -58,7 +58,7 @@ MonoBehaviour:
     verticalLerpSpeed: 0.2
     horizontalLerpSpeed: 0.2
     groundCheckRadius: 0.1
-    minimumJumpTime: 0.1
+    minimumJumpTime: 0.12
     groundCheckSize: {x: 0.8, y: 0.2}
     groundTimeThreshold: 0.2
     groundMask:
@@ -146,9 +146,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    jumpTime: 0.15
-    jumpHeight: 0.17
-    maxJumps: 3
+    jumpTime: 0.2
+    jumpHeight: 0.13
+    maxJumps: 10
     fallCurve:
       serializedVersion: 2
       m_Curve:
@@ -162,37 +162,38 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.11089095
       - serializedVersion: 3
-        time: 0.65393335
+        time: 0.40215856
         value: -50.06162
-        inSlope: -158.59981
-        outSlope: -158.59981
+        inSlope: -216.39377
+        outSlope: -216.39377
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.042591013
+        inWeight: 0.04222236
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    attackTime: 0.35
     attackXCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 19.572851
         inSlope: 0
-        outSlope: 1
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
+        time: 0.1007671
+        value: 0
+        inSlope: -687.16614
+        outSlope: -687.16614
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.02999993
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -204,19 +205,19 @@ MonoBehaviour:
         time: 0
         value: 0
         inSlope: 0
-        outSlope: 1
-        tangentMode: 0
+        outSlope: 0
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 1
+        value: 0
+        inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -225,7 +226,8 @@ MonoBehaviour:
   _inputData:
     move: 0
     jump: 0
-  _jumpsLeft: 3
+    attack: 0
+  _jumpsLeft: 10
 --- !u!114 &184158987787398803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkPoint: {x: 1.3, y: 0}
   checkSize: 0.8
+  comboCount: 3
+  comboCooldown: 0.5
   Controller: {fileID: 0}
 --- !u!212 &307455040611189981
 SpriteRenderer:
@@ -627,7 +631,19 @@ MonoBehaviour:
     m_ActionId: 48270199-525d-46fb-8290-04d6119dba48
     m_ActionName: Character/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4679646841512692292}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 86f55386-2c0b-4b72-8522-d8c33ac13d3e
     m_ActionName: Character/Attack[/XInputControllerWindows/buttonWest,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0

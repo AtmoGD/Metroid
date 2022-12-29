@@ -38,7 +38,7 @@ public class CharacterFall : CharacterState
             return;
         }
 
-        if (Controller.InputData.attack && Controller.CanAttack)
+        if (Controller.InputData.attack && Controller.AttackController.CanAttack)
         {
             Controller.ChangeState(Controller.AttackState);
             return;

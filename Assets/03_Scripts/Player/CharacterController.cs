@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private bool _debug = false;
 
     public MovementController MovementController { get; private set; } = null;
+    public AttackController AttackController { get; private set; } = null;
     public Rigidbody2D RigidBody { get; private set; } = null;
     public Animator Animator { get; private set; } = null;
 
@@ -63,18 +64,11 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    public bool CanAttack
-    {
-        get
-        {
-            return true;
-        }
-    }
-
 
     private void Awake()
     {
         MovementController = GetComponent<MovementController>();
+        AttackController = GetComponent<AttackController>();
 
         RigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();

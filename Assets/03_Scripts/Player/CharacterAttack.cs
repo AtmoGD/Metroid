@@ -24,6 +24,9 @@ public class CharacterAttack : CharacterState
         base.Exit();
 
         Controller.MovementController.UseBaseGravity = true;
+
+        //TODO: Remove later -> Just while we dont have a animation which triggers "Attack" in AttackController
+        Controller.AttackController.Attack();
     }
 
     public override void FrameUpdate()
