@@ -18,6 +18,7 @@ public class CharacterController : MonoBehaviour
     public CharacterStopMovement StopMovementState { get; private set; } = null;
     public CharacterJump JumpState { get; private set; } = null;
     public CharacterFall FallState { get; private set; } = null;
+    public CharacterAttack AttackState { get; private set; } = null;
 
     [Header("References")]
     [SerializeField] private Transform _groundCheck = null;
@@ -62,6 +63,14 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public bool CanAttack
+    {
+        get
+        {
+            return true;
+        }
+    }
+
 
     private void Awake()
     {
@@ -75,6 +84,7 @@ public class CharacterController : MonoBehaviour
         StopMovementState = new CharacterStopMovement(this);
         JumpState = new CharacterJump(this);
         FallState = new CharacterFall(this);
+        AttackState = new CharacterAttack(this);
     }
 
     private void Start()
@@ -108,6 +118,17 @@ public class CharacterController : MonoBehaviour
     {
         float newVelocityX = InputData.move * Stats.accelerationCurve.Evaluate(_time);
         MovementController.SetHorizontalVelocityClamped(newVelocityX);
+    }
+
+    public void MoveAttack(float _time)
+    {
+        float dir = RigidBody.velocity.x > 0 ? 1 : -1;
+
+        float newVelocityX = Stats.attackXCurve.Evaluate(_time) * dir;
+        MovementController.SetHorizontalVelocityClamped(newVelocityX);
+
+        float newVelocityY = Stats.attackYCurve.Evaluate(_time);
+        MovementController.SetVerticalVelocity(newVelocityY);
     }
 
     public void StopMove(float _time, float _startVelocity)
@@ -155,6 +176,18 @@ public class CharacterController : MonoBehaviour
         else if (_context.canceled)
         {
             InputData.SetJump(false);
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext _context)
+    {
+        if (_context.started)
+        {
+            InputData.SetAttack(true);
+        }
+        else if (_context.canceled)
+        {
+            InputData.SetAttack(false);
         }
     }
 

@@ -38,6 +38,12 @@ public class CharacterFall : CharacterState
             return;
         }
 
+        if (Controller.InputData.attack && Controller.CanAttack)
+        {
+            Controller.ChangeState(Controller.AttackState);
+            return;
+        }
+
         Controller.Fall(TimeInState);
         Controller.MoveHorizontal(TimeInState);
     }

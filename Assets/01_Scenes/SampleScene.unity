@@ -780,6 +780,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5611730362393459752, guid: b1e9fbb82fb21054da231716f69ee33b, type: 3}
   m_PrefabInstance: {fileID: 5611730361573287194}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1638380013 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+  m_PrefabInstance: {fileID: 3719361809472845931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdeaae3966a8c84898b6fceb5a2fc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1796583147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5611730362393459752, guid: b1e9fbb82fb21054da231716f69ee33b, type: 3}
@@ -966,6 +977,98 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1638380013}
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065149491, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[1].time
+      value: 0.1007671
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[0].value
+      value: 19.572851
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[1].inSlope
+      value: -108.05026
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[1].inWeight
+      value: 0.076617695
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackXCurve.m_Curve.Array.data[1].outSlope
+      value: -108.05026
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679646841512692292, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
+      propertyPath: _stats.attackYCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 6563920212420419138, guid: c4aad0b61fc6cb34686045106606206d, type: 3}
       propertyPath: m_RootOrder
       value: 4

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3603751762186203246}
   - component: {fileID: 4679646841512692292}
   - component: {fileID: 184158987787398803}
+  - component: {fileID: 1643835853216074133}
   - component: {fileID: 307455040611189981}
   - component: {fileID: 5450067743839535654}
   - component: {fileID: 7447105653391438200}
@@ -116,37 +117,37 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1301.7422
-        outSlope: 1301.7422
+        time: 0.0011100769
+        value: 0.9343567
+        inSlope: 429.80954
+        outSlope: 429.80954
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.030249622
+        outWeight: 0.19989452
       - serializedVersion: 3
-        time: 0.3859471
-        value: 143.41624
-        inSlope: 6.2924447
-        outSlope: 6.2924447
+        time: 0.102479175
+        value: 163.71826
+        inSlope: 191.6055
+        outSlope: 191.6055
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.09131424
+        outWeight: 0.1727092
       - serializedVersion: 3
-        time: 1.00579
-        value: 144.7969
-        inSlope: 12.160859
-        outSlope: 12.160859
+        time: 0.99949926
+        value: 198.08246
+        inSlope: 35.323555
+        outSlope: 35.323555
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.17250891
+        inWeight: 0.20826815
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    jumpTime: 0.2
-    jumpHeight: 0.2
+    jumpTime: 0.15
+    jumpHeight: 0.17
     maxJumps: 3
     fallCurve:
       serializedVersion: 2
@@ -172,6 +173,54 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    attackXCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attackYCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   jumpHeightMultiplier: 1
   _inputData:
     move: 0
@@ -192,6 +241,21 @@ MonoBehaviour:
   maxSpeed: 12
   lerpSpeed: 15
   baseGravity: -50
+--- !u!114 &1643835853216074133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117487141236724627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957943177952110448546035f4685ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoint: {x: 1.3, y: 0}
+  checkSize: 0.8
+  Controller: {fileID: 0}
 --- !u!212 &307455040611189981
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -562,6 +626,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 48270199-525d-46fb-8290-04d6119dba48
     m_ActionName: Character/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 86f55386-2c0b-4b72-8522-d8c33ac13d3e
+    m_ActionName: Character/Attack[/XInputControllerWindows/buttonWest,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Character

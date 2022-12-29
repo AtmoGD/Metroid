@@ -46,6 +46,12 @@ public class CharacterMove : CharacterState
             return;
         }
 
+        if (Controller.InputData.attack && Controller.CanAttack)
+        {
+            Controller.ChangeState(Controller.AttackState);
+            return;
+        }
+
         Controller.MoveHorizontal(TimeInState);
     }
 

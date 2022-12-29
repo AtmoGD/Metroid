@@ -48,6 +48,12 @@ public class CharacterJump : CharacterState
                 Controller.ChangeState(Controller.FallState);
                 return;
             }
+
+            if (Controller.InputData.attack && Controller.CanAttack)
+            {
+                Controller.ChangeState(Controller.AttackState);
+                return;
+            }
         }
 
         Controller.Jump(TimeInState);

@@ -10,6 +10,8 @@ public class MovementController : MonoBehaviour
 
     [SerializeField] private float baseGravity = -0.1f;
 
+    public bool UseBaseGravity { get; set; } = true;
+
     private Rigidbody2D rb = null;
     private Vector2 targetVelocity = Vector2.zero;
 
@@ -34,7 +36,10 @@ public class MovementController : MonoBehaviour
     {
         Vector2 newVelocity = rb.velocity;
         newVelocity = Vector2.Lerp(newVelocity, targetVelocity, lerpSpeed * Time.deltaTime);
-        newVelocity.y += baseGravity * Time.deltaTime;
+
+        if (UseBaseGravity)
+            newVelocity.y += baseGravity * Time.deltaTime;
+
         rb.velocity = newVelocity;
     }
 

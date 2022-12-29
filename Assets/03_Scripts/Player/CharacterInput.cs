@@ -8,6 +8,7 @@ public class CharacterInput
 {
     [SerializeField] public float move = 0f;
     [SerializeField] public bool jump = false;
+    [SerializeField] public bool attack = false;
 
     public void SetMove(float _move)
     {
@@ -17,5 +18,10 @@ public class CharacterInput
     public void SetJump(bool _jump)
     {
         jump = _jump;
+    }
+
+    public void SetAttack(bool _attack)
+    {
+        attack = _attack;
     }
 }

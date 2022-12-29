@@ -43,6 +43,14 @@ public class CharacterIdle : CharacterState
             Controller.ChangeState(Controller.FallState);
             return;
         }
+
+        if (Controller.InputData.attack && Controller.CanAttack)
+        {
+            Controller.ChangeState(Controller.AttackState);
+            return;
+        }
+
+
     }
 
     public override void PhysicsUpdate()
