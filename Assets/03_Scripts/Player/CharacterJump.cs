@@ -54,6 +54,12 @@ public class CharacterJump : CharacterState
                 Controller.ChangeState(Controller.AttackState);
                 return;
             }
+
+            if (Controller.InputData.dash && Controller.CanDash)
+            {
+                Controller.ChangeState(Controller.DashState);
+                return;
+            }
         }
 
         Controller.Jump(TimeInState);

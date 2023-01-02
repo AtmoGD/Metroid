@@ -13,8 +13,9 @@ public class CharacterIdle : CharacterState
         base.Enter();
 
         Controller.ResetJumps();
+        Controller.ResetDashes();
 
-        Debug.Log("Idle Enter");
+        Debug.Log("HIIEERRR: Idle Enter");
     }
 
     public override void Exit()

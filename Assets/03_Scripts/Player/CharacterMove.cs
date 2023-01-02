@@ -14,6 +14,8 @@ public class CharacterMove : CharacterState
 
         Controller.ResetJumps();
 
+        Controller.ResetDashes();
+
         Debug.Log("Move Enter");
     }
 
@@ -49,6 +51,12 @@ public class CharacterMove : CharacterState
         if (Controller.InputData.attack && Controller.AttackController.CanAttack)
         {
             Controller.ChangeState(Controller.AttackState);
+            return;
+        }
+
+        if (Controller.InputData.dash && Controller.CanDash)
+        {
+            Controller.ChangeState(Controller.DashState);
             return;
         }
 

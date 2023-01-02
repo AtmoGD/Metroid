@@ -6,11 +6,12 @@ using System;
 [Serializable]
 public class CharacterInput
 {
-    [SerializeField] public float move = 0f;
+    [SerializeField] public Vector2 move = Vector2.zero;
     [SerializeField] public bool jump = false;
     [SerializeField] public bool attack = false;
+    [SerializeField] public bool dash = false;
 
-    public void SetMove(float _move)
+    public void SetMove(Vector2 _move)
     {
         move = _move;
     }
@@ -23,5 +24,10 @@ public class CharacterInput
     public void SetAttack(bool _attack)
     {
         attack = _attack;
+    }
+
+    public void SetDash(bool _dash)
+    {
+        dash = _dash;
     }
 }

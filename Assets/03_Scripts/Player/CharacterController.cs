@@ -20,6 +20,7 @@ public class CharacterController : MonoBehaviour
     public CharacterJump JumpState { get; private set; } = null;
     public CharacterFall FallState { get; private set; } = null;
     public CharacterAttack AttackState { get; private set; } = null;
+    public CharacterDash DashState { get; private set; } = null;
 
     [Header("References")]
     [SerializeField] private Transform _groundCheck = null;
@@ -47,6 +48,10 @@ public class CharacterController : MonoBehaviour
     public int JumpsLeft => _jumpsLeft;
     public bool CanJump => JumpsLeft > 0;
 
+    [SerializeField] private int _dashesLeft = 0;
+    public int DashesLeft => _dashesLeft;
+    public bool CanDash => DashesLeft > 0;
+
     public bool IsGrounded
     {
         get
@@ -60,7 +65,7 @@ public class CharacterController : MonoBehaviour
     {
         get
         {
-            return Mathf.Abs(InputData.move);
+            return Mathf.Abs(InputData.move.x);
         }
     }
 
@@ -79,6 +84,7 @@ public class CharacterController : MonoBehaviour
         JumpState = new CharacterJump(this);
         FallState = new CharacterFall(this);
         AttackState = new CharacterAttack(this);
+        DashState = new CharacterDash(this);
     }
 
     private void Start()
@@ -105,12 +111,12 @@ public class CharacterController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        InputData.SetMove(context.ReadValue<Vector2>().x);
+        InputData.SetMove(context.ReadValue<Vector2>());
     }
 
     public void MoveHorizontal(float _time)
     {
-        float newVelocityX = InputData.move * Stats.accelerationCurve.Evaluate(_time);
+        float newVelocityX = InputData.move.x * Stats.accelerationCurve.Evaluate(_time);
         MovementController.SetHorizontalVelocityClamped(newVelocityX);
     }
 
@@ -127,7 +133,7 @@ public class CharacterController : MonoBehaviour
 
     public void StopMove(float _time, float _startVelocity)
     {
-        float newVelocityX = _startVelocity * InputData.move * Stats.decelerationCurve.Evaluate(_time);
+        float newVelocityX = _startVelocity * InputData.move.x * Stats.decelerationCurve.Evaluate(_time);
         MovementController.SetHorizontalVelocityClamped(newVelocityX);
     }
 
@@ -136,6 +142,17 @@ public class CharacterController : MonoBehaviour
         float newYVelocity = Stats.fallCurve.Evaluate(_time);
 
         MovementController.SetVerticalVelocity(newYVelocity);
+    }
+
+    public void Dash(float _time, Vector2 _direction)
+    {
+        float time = _time / Stats.dashTime;
+
+        float newVelocityX = _direction.x * Stats.dashCurve.Evaluate(time) * Stats.dashSpeed;
+        float newVelocityY = _direction.y * Stats.dashCurve.Evaluate(time) * Stats.dashSpeed;
+
+        MovementController.SetHorizontalVelocity(newVelocityX);
+        MovementController.SetVerticalVelocity(newVelocityY);
     }
 
     public void Jump(float _time)
@@ -161,6 +178,21 @@ public class CharacterController : MonoBehaviour
         _jumpsLeft = Stats.maxJumps;
     }
 
+    public void RemoveDash()
+    {
+        _dashesLeft--;
+    }
+
+    public void AddDash(int _amount = 1)
+    {
+        _dashesLeft += _amount;
+    }
+
+    public void ResetDashes()
+    {
+        _dashesLeft = Stats.maxDashes;
+    }
+
     public void OnJump(InputAction.CallbackContext _context)
     {
         if (_context.started)
@@ -182,6 +214,18 @@ public class CharacterController : MonoBehaviour
         else if (_context.canceled)
         {
             InputData.SetAttack(false);
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext _context)
+    {
+        if (_context.started)
+        {
+            InputData.SetDash(true);
+        }
+        else if (_context.canceled)
+        {
+            InputData.SetDash(false);
         }
     }
 

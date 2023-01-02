@@ -44,6 +44,12 @@ public class CharacterFall : CharacterState
             return;
         }
 
+        if (Controller.InputData.dash && Controller.CanDash)
+        {
+            Controller.ChangeState(Controller.DashState);
+            return;
+        }
+
         Controller.Fall(TimeInState);
         Controller.MoveHorizontal(TimeInState);
     }
