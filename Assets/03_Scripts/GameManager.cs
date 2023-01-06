@@ -13,32 +13,62 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private PlayerInput characterInput;
+    [SerializeField] private UIController uiController;
+    [SerializeField] private PlayerInput uiInput;
+
     public GameState gameState = GameState.Playing;
+
+    private void Start()
+    {
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        uiInput.DeactivateInput();
+        characterInput.ActivateInput();
+    }
 
     public void OnPauseGame(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && gameState == GameState.Playing)
         {
-            switch (gameState)
-            {
-                case GameState.Playing:
-                    Time.timeScale = 0f;
-                    gameState = GameState.Paused;
-                    break;
-                case GameState.Paused:
-                    Time.timeScale = 1f;
-                    gameState = GameState.Playing;
-                    break;
-            }
+            PauseGame();
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        gameState = GameState.Paused;
+        uiController.OpenPauseMenu();
+        characterInput.DeactivateInput();
+        uiInput.ActivateInput();
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        gameState = GameState.Playing;
+        characterInput.ActivateInput();
+        uiInput.DeactivateInput();
     }
 
     public void OnReloadLevel(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            ReloadLevel();
         }
+    }
+
+    public void ReloadLevel()
+    {
+        print("Reloading level");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnQuitGame(InputAction.CallbackContext context)

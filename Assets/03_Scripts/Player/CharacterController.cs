@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
 
     public MovementController MovementController { get; private set; } = null;
     public AttackController AttackController { get; private set; } = null;
+    public PlayerInput PlayerInput { get; private set; } = null;
     public Rigidbody2D RigidBody { get; private set; } = null;
     public Animator Animator { get; private set; } = null;
 
@@ -75,6 +76,7 @@ public class CharacterController : MonoBehaviour
     {
         MovementController = GetComponent<MovementController>();
         AttackController = GetComponent<AttackController>();
+        PlayerInput = GetComponent<PlayerInput>();
 
         RigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
