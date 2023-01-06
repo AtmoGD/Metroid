@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3603751762186203246}
   - component: {fileID: 4679646841512692292}
+  - component: {fileID: 7373824510816304720}
   - component: {fileID: 184158987787398803}
   - component: {fileID: 1643835853216074133}
   - component: {fileID: 307455040611189981}
@@ -155,15 +156,15 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.0015563965
         value: 0
-        inSlope: -3.3526511
-        outSlope: -3.3526511
+        inSlope: -35.36773
+        outSlope: -35.36773
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.11089095
+        outWeight: 0.19999999
       - serializedVersion: 3
-        time: 0.40215856
-        value: -50.06162
+        time: 0.3954752
+        value: -39.435337
         inSlope: -216.39377
         outSlope: -216.39377
         tangentMode: 0
@@ -222,12 +223,56 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    dashCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    dashTime: 0.2
+    dashSpeed: 1
+    maxDashes: 2
+    continiousDashing: 1
+    directionType: 0
+    dirThreshold: 0.25
   jumpHeightMultiplier: 1
   _inputData:
-    move: 0
+    move: {x: 0, y: 0}
     jump: 0
     attack: 0
+    dash: 0
   _jumpsLeft: 10
+  _dashesLeft: 0
+--- !u!114 &7373824510816304720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117487141236724627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf61a8cb0176d043b192c7b77ff1b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &184158987787398803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,6 +691,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 86f55386-2c0b-4b72-8522-d8c33ac13d3e
     m_ActionName: Character/Attack[/XInputControllerWindows/buttonWest,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 23800993-422c-4e7c-81fb-05c5e9826669
+    m_ActionName: Character/Dash[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Character
