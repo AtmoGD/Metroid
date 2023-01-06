@@ -26,12 +26,6 @@ public class MovementController : MonoBehaviour
         targetVelocity = _velocity;
     }
 
-    private void FixedUpdate()
-    {
-        // rb.MovePosition(rb.position + velocity * Time.deltaTime);
-        // rb.velocity = targetVelocity * Time.deltaTime;
-    }
-
     private void Update()
     {
         Vector2 newVelocity = rb.velocity;
@@ -65,9 +59,12 @@ public class MovementController : MonoBehaviour
         targetVelocity.x = Mathf.Clamp(targetVelocity.x, -maxSpeed, maxSpeed);
     }
 
-    public void SetVelocity(Vector2 _velocity, bool _lerp = false)
+    public void SetVelocity(Vector2 _velocity, bool _lerp = true)
     {
         targetVelocity = _velocity;
+
+        if (!_lerp)
+            rb.velocity = _velocity;
     }
 
     public void SetForce(Vector2 _force)

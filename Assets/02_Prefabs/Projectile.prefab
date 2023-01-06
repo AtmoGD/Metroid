@@ -50,10 +50,10 @@ MonoBehaviour:
   speed: 8
   lifeTime: 5
   damage: 1
-  hitForce: 5
+  hitForce: 80
   immune: 1
   immuneOnStart: 1
-  immuneOnStartDelay: 0.1
+  immuneOnStartDelay: 0.3
 --- !u!50 &6444748904533032945
 Rigidbody2D:
   serializedVersion: 4

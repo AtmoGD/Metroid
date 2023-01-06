@@ -23,9 +23,9 @@ public class HealthController : MonoBehaviour, IDamagable
         }
     }
 
-    public virtual void TakeDamage(int damage, GameObject damageSource, float damageForce)
+    public virtual void TakeDamage(Damage damage)
     {
-        currentHealth -= damage;
+        currentHealth -= damage.Amount;
         if (currentHealth <= 0)
         {
             Die();

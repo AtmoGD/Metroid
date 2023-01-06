@@ -146,9 +146,14 @@ public class CharacterController : MonoBehaviour
         MovementController.SetVerticalVelocity(newYVelocity);
     }
 
-    public void MoveHitForce()
+    public void ApplyHitForce()
     {
-        MovementController.SetVelocity(InputData.hitForce);
+        Damage damage = InputData.damage[InputData.damage.Count - 1];
+
+        Vector2 vel = ((Vector2)transform.position - damage.HitPoint).normalized;
+        vel *= damage.Force;
+
+        MovementController.SetVelocity(vel);
     }
 
     public void Dash(float _time, Vector2 _direction)
@@ -200,10 +205,10 @@ public class CharacterController : MonoBehaviour
         _dashesLeft = Stats.maxDashes;
     }
 
-    public void OnGetHit(Vector2 _hitForce = default)
+    public void OnGetHit(Damage _damage)
     {
         InputData.SetGetHit(true);
-        InputData.SetHitForce(_hitForce);
+        InputData.AddGetHit(_damage);
 
         ChangeState(GetHitState);
     }

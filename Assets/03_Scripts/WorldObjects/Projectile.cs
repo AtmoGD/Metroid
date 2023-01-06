@@ -53,11 +53,23 @@ public class Projectile : MonoBehaviour
         IDamagable damagable = collision.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(damage, this.gameObject, hitForce);
-            Die();
+            Vector2 hitPoint = collision.ClosestPoint(transform.position);
+
+            Damage damage = new Damage(this.damage, hitPoint, hitForce);
+            damagable.TakeDamage(damage);
         }
 
-        if (!immune)
-            Die();
+        if (immune)
+            return;
+
+        Die();
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject == gameObject || immune)
+            return;
+
+        Die();
     }
 }

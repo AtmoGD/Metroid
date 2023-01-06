@@ -12,7 +12,15 @@ public class CharacterGetHit : CharacterState
     {
         base.Enter();
 
+        Debug.Log("Get Hit Enter");
+
+        Controller.InputData.move = Vector2.zero;
+
+        Controller.RigidBody.velocity = Vector2.zero;
+
         CanGetHit = false;
+
+        Controller.ApplyHitForce();
     }
 
     public override void Exit()
@@ -28,11 +36,9 @@ public class CharacterGetHit : CharacterState
 
         if (TimeInState >= Controller.Stats.getHitTime)
         {
-            Controller.ChangeState(Controller.IdleState);
+            Controller.ChangeState(Controller.FallState);
             return;
         }
-
-        Controller.MoveHitForce();
     }
 
 

@@ -10,7 +10,7 @@ public class CharacterInput
     [SerializeField] public bool jump = false;
     [SerializeField] public bool attack = false;
     [SerializeField] public bool getHit = false;
-    [SerializeField] public Vector2 hitForce = Vector2.zero;
+    [SerializeField] public List<Damage> damage = new List<Damage>();
     [SerializeField] public bool dash = false;
 
     public void SetMove(Vector2 _move)
@@ -33,9 +33,9 @@ public class CharacterInput
         getHit = _getHit;
     }
 
-    public void SetHitForce(Vector2 _hitForce)
+    public void AddGetHit(Damage _damage)
     {
-        hitForce = _hitForce;
+        damage.Add(_damage);
     }
 
     public void SetDash(bool _dash)
