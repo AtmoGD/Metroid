@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour, IDamagable
 {
-    [SerializeField] private int maxHealth = 3;
-    [SerializeField] private int currentHealth = 3;
+    [SerializeField] protected int maxHealth = 3;
+    [SerializeField] protected int currentHealth = 3;
 
     public int CurrentHealth
     {
@@ -23,7 +23,7 @@ public class HealthController : MonoBehaviour, IDamagable
         }
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, GameObject damageSource, float damageForce)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -32,7 +32,7 @@ public class HealthController : MonoBehaviour, IDamagable
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         Destroy(gameObject);
     }

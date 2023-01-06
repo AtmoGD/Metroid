@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private float lifeTime = 5f;
     [SerializeField] private int damage = 1;
+    [SerializeField] private float hitForce = 1f;
     [SerializeField] private bool immune = true;
     [SerializeField] private bool immuneOnStart = true;
     [SerializeField] private float immuneOnStartDelay = 0.1f;
@@ -52,7 +53,7 @@ public class Projectile : MonoBehaviour
         IDamagable damagable = collision.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(damage);
+            damagable.TakeDamage(damage, this.gameObject, hitForce);
             Die();
         }
 

@@ -23,6 +23,7 @@ public class CharacterStats
     public AnimationCurve attackXCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public AnimationCurve attackYCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public AnimationCurve dashCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    public float getHitTime = 0.2f;
     public float dashTime = 0.2f;
     public float dashSpeed = 1f;
     public int maxDashes = 2;

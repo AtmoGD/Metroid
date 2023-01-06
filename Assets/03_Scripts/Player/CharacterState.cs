@@ -6,6 +6,7 @@ public class CharacterState
 {
     protected CharacterController Controller { get; private set; } = null;
     protected float TimeInState { get; private set; } = 0.0f;
+    protected bool CanGetHit { get; set; } = true;
 
     public CharacterState(CharacterController controller)
     {

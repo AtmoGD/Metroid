@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3603751762186203246}
   - component: {fileID: 4679646841512692292}
-  - component: {fileID: 7373824510816304720}
   - component: {fileID: 184158987787398803}
   - component: {fileID: 1643835853216074133}
   - component: {fileID: 307455040611189981}
   - component: {fileID: 5450067743839535654}
   - component: {fileID: 7447105653391438200}
+  - component: {fileID: 855143108723734907}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -118,38 +118,38 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0011100769
-        value: 0.9343567
-        inSlope: 429.80954
-        outSlope: 429.80954
+        time: -0.0022171317
+        value: 150.44882
+        inSlope: 228.19644
+        outSlope: 228.19644
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.19989452
+        outWeight: 0.061548304
       - serializedVersion: 3
-        time: 0.102479175
-        value: 163.71826
-        inSlope: 191.6055
-        outSlope: 191.6055
+        time: 0.8268565
+        value: 198.65157
+        inSlope: 4.0029063
+        outSlope: 4.0029063
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.1727092
+        outWeight: 0.11564769
       - serializedVersion: 3
-        time: 0.99949926
-        value: 198.08246
-        inSlope: 35.323555
-        outSlope: 35.323555
+        time: 0.9894895
+        value: 46.704895
+        inSlope: -2932.9116
+        outSlope: -2932.9116
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.20826815
+        inWeight: 0.047587547
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     jumpTime: 0.2
-    jumpHeight: 0.13
-    maxJumps: 10
+    jumpHeight: 0.15
+    maxJumps: 2
     fallCurve:
       serializedVersion: 2
       m_Curve:
@@ -227,52 +227,52 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
+        time: 0.0017786399
+        value: 0.019396603
+        inSlope: 8.51612
+        outSlope: 8.51612
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.06297022
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
+        time: 0.24556923
+        value: 0.9920268
+        inSlope: 0.017384227
+        outSlope: 0.017384227
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.054061998
+      - serializedVersion: 3
+        time: 0.98866236
+        value: -0.007626891
+        inSlope: -4.250549
+        outSlope: -4.250549
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.064246304
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    dashTime: 0.2
-    dashSpeed: 1
+    getHitTime: 0.8
+    dashTime: 0.08
+    dashSpeed: 90
     maxDashes: 2
-    continiousDashing: 1
-    directionType: 0
+    continiousDashing: 0
+    directionType: 1
     dirThreshold: 0.25
   jumpHeightMultiplier: 1
   _inputData:
     move: {x: 0, y: 0}
     jump: 0
     attack: 0
+    getHit: 0
+    hitForce: {x: 0, y: 0}
     dash: 0
-  _jumpsLeft: 10
-  _dashesLeft: 0
---- !u!114 &7373824510816304720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4117487141236724627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf61a8cb0176d043b192c7b77ff1b39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _jumpsLeft: 2
+  _dashesLeft: 2
 --- !u!114 &184158987787398803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +394,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &855143108723734907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117487141236724627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375ac29d30b084b4285759c99c36bf3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 3
 --- !u!1 &4118556328072373199
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,9 +706,33 @@ MonoBehaviour:
     m_ActionId: 86f55386-2c0b-4b72-8522-d8c33ac13d3e
     m_ActionName: Character/Attack[/XInputControllerWindows/buttonWest,/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4679646841512692292}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 23800993-422c-4e7c-81fb-05c5e9826669
-    m_ActionName: Character/Dash[/Keyboard/shift]
+    m_ActionName: Character/Dash[/SwitchProControllerHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 08901c9f-47f4-427e-bccb-88de2744352f
+    m_ActionName: BaseControlls/Pause[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9dc7c8d0-9938-42ac-97c8-990b96608539
+    m_ActionName: BaseControlls/ReloadScene[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f36f297f-1ca0-434f-b1bb-fe7a14fa8135
+    m_ActionName: BaseControlls/QuitGame[/Keyboard/o]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Character

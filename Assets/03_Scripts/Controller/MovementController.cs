@@ -70,6 +70,11 @@ public class MovementController : MonoBehaviour
         targetVelocity = _velocity;
     }
 
+    public void SetForce(Vector2 _force)
+    {
+        rb.AddForce(_force, ForceMode2D.Impulse);
+    }
+
     public void SetVerticalVelocity(float _velocity)
     {
         targetVelocity.y = _velocity;

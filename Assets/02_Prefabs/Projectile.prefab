@@ -50,6 +50,7 @@ MonoBehaviour:
   speed: 8
   lifeTime: 5
   damage: 1
+  hitForce: 5
   immune: 1
   immuneOnStart: 1
   immuneOnStartDelay: 0.1

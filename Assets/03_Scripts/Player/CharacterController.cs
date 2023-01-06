@@ -20,6 +20,7 @@ public class CharacterController : MonoBehaviour
     public CharacterJump JumpState { get; private set; } = null;
     public CharacterFall FallState { get; private set; } = null;
     public CharacterAttack AttackState { get; private set; } = null;
+    public CharacterGetHit GetHitState { get; private set; } = null;
     public CharacterDash DashState { get; private set; } = null;
 
     [Header("References")]
@@ -84,6 +85,7 @@ public class CharacterController : MonoBehaviour
         JumpState = new CharacterJump(this);
         FallState = new CharacterFall(this);
         AttackState = new CharacterAttack(this);
+        GetHitState = new CharacterGetHit(this);
         DashState = new CharacterDash(this);
     }
 
@@ -144,6 +146,11 @@ public class CharacterController : MonoBehaviour
         MovementController.SetVerticalVelocity(newYVelocity);
     }
 
+    public void MoveHitForce()
+    {
+        MovementController.SetVelocity(InputData.hitForce);
+    }
+
     public void Dash(float _time, Vector2 _direction)
     {
         float time = _time / Stats.dashTime;
@@ -191,6 +198,14 @@ public class CharacterController : MonoBehaviour
     public void ResetDashes()
     {
         _dashesLeft = Stats.maxDashes;
+    }
+
+    public void OnGetHit(Vector2 _hitForce = default)
+    {
+        InputData.SetGetHit(true);
+        InputData.SetHitForce(_hitForce);
+
+        ChangeState(GetHitState);
     }
 
     public void OnJump(InputAction.CallbackContext _context)
