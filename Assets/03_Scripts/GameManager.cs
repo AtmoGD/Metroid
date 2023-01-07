@@ -17,8 +17,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerInput characterInput;
     [SerializeField] private UIController uiController;
     [SerializeField] private PlayerInput uiInput;
+    [SerializeField] private SectionController startSection;
+    [SerializeField] private SectionController currentSection;
 
     public GameState gameState = GameState.Playing;
+
+    private void Awake()
+    {
+    }
 
     private void Start()
     {
@@ -27,6 +33,14 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
+        // SetCurrentSection(currentSection);
+        currentSection = null;
+
+        startSection.gameObject.SetActive(true);
+        characterController.gameObject.SetActive(true);
+        startSection.OnPlayerEnter(characterController);
+
+
         uiInput.DeactivateInput();
         characterInput.ActivateInput();
     }
@@ -54,6 +68,23 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Playing;
         characterInput.ActivateInput();
         uiInput.DeactivateInput();
+    }
+
+    public void SetCurrentSection(SectionController section)
+    {
+        if (currentSection != null)
+        {
+            currentSection.Deactivate();
+            currentSection.ActivateNeighbourSections(false, section);
+        }
+
+        if (section != null)
+        {
+            section.ActivateNeighbourSections(true);
+        }
+
+
+        currentSection = section;
     }
 
     public void OnReloadLevel(InputAction.CallbackContext context)

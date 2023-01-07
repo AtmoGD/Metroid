@@ -424,7 +424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1785118242110516741
 Transform:
   m_ObjectHideFlags: 0
@@ -733,6 +733,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f36f297f-1ca0-434f-b1bb-fe7a14fa8135
     m_ActionName: BaseControlls/QuitGame[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2e0eb85c-b5bc-4edb-8b4e-c54f90336ece
+    m_ActionName: UI/Move[/SwitchProControllerHID/leftStick,/SwitchProControllerHID/dpad/up,/SwitchProControllerHID/dpad/down,/SwitchProControllerHID/dpad/left,/SwitchProControllerHID/dpad/right,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5dc84143-8afd-4ccd-af30-c087f53356ba
+    m_ActionName: UI/Select[/SwitchProControllerHID/buttonSouth,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 155eb6b5-b296-4910-95cd-7489a41e5958
+    m_ActionName: UI/Cancel[/SwitchProControllerHID/buttonEast,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Character
