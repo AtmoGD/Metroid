@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterHealthController : HealthController
 {
+    [SerializeField] protected Animator LoadingScreenAnimator = null;
     private CharacterController characterController;
 
     private float immuneTime = 0.0f;
@@ -34,6 +35,28 @@ public class CharacterHealthController : HealthController
             characterController.OnGetHit(damage);
 
             immuneTime = characterController.Stats.immuneTime;
+        }
+    }
+
+    protected override void Die()
+    {
+        if (LoadingScreenAnimator)
+        {
+            LoadingScreenAnimator.SetTrigger("StartLoading");
+        }
+    }
+
+    public void Respawn()
+    {
+        currentHealth = maxHealth;
+        characterController.OnRespawn();
+    }
+
+    public void StartEndLoading()
+    {
+        if (LoadingScreenAnimator)
+        {
+            LoadingScreenAnimator.SetTrigger("EndLoading");
         }
     }
 }

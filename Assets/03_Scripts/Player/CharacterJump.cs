@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterJump : CharacterState
 {
+    bool isWallJump = false;
+    int wallJumpDirection = 0;
+
     public CharacterJump(CharacterController controller) : base(controller)
     {
     }
@@ -12,9 +15,17 @@ public class CharacterJump : CharacterState
     {
         base.Enter();
 
-        Controller.RemoveJump();
+        bool touchingRight = Controller.IsTouchingWallRight;
+        bool touchingLeft = Controller.IsTouchingWallLeft;
 
-        Debug.Log("Jump Enter");
+        isWallJump = touchingRight || touchingLeft;
+
+        if (isWallJump)
+            wallJumpDirection = touchingRight ? -1 : 1;
+        else
+            Controller.RemoveJump();
+
+        Debug.Log("Jump Enter, Is Wall Jump: " + isWallJump);
     }
 
     public override void Exit()
@@ -63,7 +74,11 @@ public class CharacterJump : CharacterState
         }
 
         Controller.Jump(TimeInState);
-        Controller.MoveHorizontal(TimeInState);
+
+        if (isWallJump)
+            Controller.WallJumpHorizontal(TimeInState, wallJumpDirection);
+        else
+            Controller.MoveHorizontal(TimeInState);
     }
 
 

@@ -5,6 +5,8 @@ using System;
 
 public enum DirectionType
 {
+    Vertical,
+    Horizontal,
     Four,
     Eight
 }
@@ -18,6 +20,8 @@ public class CharacterStats
     public float jumpTime = 0.2f;
     public float jumpHeight = 1f;
     public int maxJumps = 3;
+    public AnimationCurve wallJumpHorizontalCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    public float wallJumpHorizontalSpeed = 2f;
     public AnimationCurve fallCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public float attackTime = 0.2f;
     public AnimationCurve attackXCurve = AnimationCurve.Linear(0, 0, 1, 1);

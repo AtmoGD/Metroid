@@ -34,6 +34,7 @@ public class HealthController : MonoBehaviour, IDamagable
 
     protected virtual void Die()
     {
+        // controller.OnRespawn();
         Destroy(gameObject);
     }
 }

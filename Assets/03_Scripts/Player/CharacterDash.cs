@@ -93,22 +93,26 @@ public class CharacterDash : CharacterState
                     return dir.y > 0f ? Vector2.up : Vector2.down;
                 }
             }
-            else
+            else if (Controller.Stats.directionType == DirectionType.Eight)
             {
                 Vector2 dir8 = Vector2.zero;
-
-                // if (Mathf.Abs(dir.x) > 0f)
-                // {
                 dir8.x = Mathf.Abs(dir.x) > Controller.Stats.dirThreshold ? dir.x > 0f ? 1 : -1 : 0f;
-                // }
-
-
-                // if (Mathf.Abs(dir.y) > 0f)
-                // {
                 dir8.y = Mathf.Abs(dir.y) > Controller.Stats.dirThreshold ? dir.y > 0f ? 1 : -1 : 0f;
-                // }
-
                 return dir8;
+            }
+            else if (Controller.Stats.directionType == DirectionType.Vertical)
+            {
+                float dirY = Mathf.Abs(dir.y) > Controller.Stats.dirThreshold ? dir.y > 0f ? 1 : -1 : 0f;
+                return new Vector2(0f, dirY);
+            }
+            else if (Controller.Stats.directionType == DirectionType.Horizontal)
+            {
+                float dirX = Mathf.Abs(dir.x) > Controller.Stats.dirThreshold ? dir.x > 0f ? 1 : -1 : 0f;
+                return new Vector2(dirX, 0f);
+            }
+            else
+            {
+                return Vector2.zero;
             }
         }
     }

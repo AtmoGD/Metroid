@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 5450067743839535654}
   - component: {fileID: 7447105653391438200}
   - component: {fileID: 855143108723734907}
-  m_Layer: 0
+  - component: {fileID: 3719361809472845947}
+  m_Layer: 14
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,11 +32,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4117487141236724627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.21, y: -3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1371909208897214253}
+  - {fileID: 8087015535073247017}
+  - {fileID: 2397324646804936333}
   m_Father: {fileID: 6563920212420419138}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,16 +56,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 1
   _groundCheck: {fileID: 1371909208897214253}
+  _wallCheckLeft: {fileID: 8087015535073247017}
+  _wallCheckRight: {fileID: 2397324646804936333}
   _settings:
     idleToMoveThreshold: 0.05
     moveToIdleThreshold: 0.2
     verticalLerpSpeed: 0.2
     horizontalLerpSpeed: 0.2
     groundCheckRadius: 0.1
-    minimumJumpTime: 0.12
+    minimumJumpTime: 0.08
     groundCheckSize: {x: 0.8, y: 0.2}
+    wallCheckSize: {x: 0.2, y: 0.8}
     groundTimeThreshold: 0.2
     groundMask:
+      serializedVersion: 2
+      m_Bits: 1024
+    wallMask:
       serializedVersion: 2
       m_Bits: 1024
   _stats:
@@ -147,29 +156,63 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    jumpTime: 0.2
-    jumpHeight: 0.15
+    jumpTime: 0.25
+    jumpHeight: 0.09
     maxJumps: 2
+    wallJumpHorizontalCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 7.6741657
+        outSlope: 7.6741657
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.014444444
+      - serializedVersion: 3
+        time: 0.36309883
+        value: 0.99230295
+        inSlope: 0.030412415
+        outSlope: 0.030412415
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.08934064
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    wallJumpHorizontalSpeed: 30
     fallCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0.0015563965
         value: 0
-        inSlope: -35.36773
-        outSlope: -35.36773
+        inSlope: -14.461453
+        outSlope: -14.461453
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.19999999
+        outWeight: 0.07472024
       - serializedVersion: 3
-        time: 0.3954752
-        value: -39.435337
-        inSlope: -216.39377
-        outSlope: -216.39377
+        time: 0.5987141
+        value: -35.327095
+        inSlope: -79.31849
+        outSlope: -79.31849
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.04222236
+        inWeight: 0.051905427
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -256,7 +299,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    immuneTime: 1.5
+    immuneTime: 1
     getHitTime: 0.04
     dashTime: 0.08
     dashSpeed: 90
@@ -287,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 12
   lerpSpeed: 15
-  baseGravity: -50
+  baseGravity: -10
 --- !u!114 &1643835853216074133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +451,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 3
+--- !u!114 &3719361809472845947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117487141236724627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e4cd8a87aac4341a51152257e51f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4118556328072373199
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4118556328072373199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 9.2, y: 11.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -567,6 +622,68 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!1 &6423780291747479534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2397324646804936333}
+  m_Layer: 14
+  m_Name: WallCheckRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2397324646804936333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423780291747479534}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3603751762186203246}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7322979760949822954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8087015535073247017}
+  m_Layer: 14
+  m_Name: WallCheckLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8087015535073247017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322979760949822954}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3603751762186203246}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7557232064263856080
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +693,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371909208897214253}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +727,7 @@ GameObject:
   - component: {fileID: 1065149491}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

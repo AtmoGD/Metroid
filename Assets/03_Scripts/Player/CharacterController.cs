@@ -14,6 +14,8 @@ public class CharacterController : MonoBehaviour
     public Rigidbody2D RigidBody { get; private set; } = null;
     public Animator Animator { get; private set; } = null;
 
+    public Checkpoint CurrentCheckpoint { get; private set; } = null;
+
     private CharacterState CurrentState { get; set; } = null;
     public CharacterIdle IdleState { get; private set; } = null;
     public CharacterMove MoveState { get; private set; } = null;
@@ -27,6 +29,11 @@ public class CharacterController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform _groundCheck = null;
     public Transform GroundCheck => _groundCheck;
+    [SerializeField] private Transform _wallCheckLeft = null;
+    public Transform WallCheckLeft => _wallCheckLeft;
+    [SerializeField] private Transform _wallCheckRight = null;
+    public Transform WallCheckRight => _wallCheckRight;
+
 
 
     [Header("Settings")]
@@ -59,6 +66,24 @@ public class CharacterController : MonoBehaviour
         get
         {
             Collider2D[] colliders = Physics2D.OverlapBoxAll(GroundCheck.position, Settings.groundCheckSize, 0f, Settings.groundMask);
+            return colliders.Length > 0;
+        }
+    }
+
+    public bool IsTouchingWallLeft
+    {
+        get
+        {
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(WallCheckLeft.position, Settings.wallCheckSize, 0f, Settings.wallMask);
+            return colliders.Length > 0;
+        }
+    }
+
+    public bool IsTouchingWallRight
+    {
+        get
+        {
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(WallCheckRight.position, Settings.wallCheckSize, 0f, Settings.wallMask);
             return colliders.Length > 0;
         }
     }
@@ -177,6 +202,12 @@ public class CharacterController : MonoBehaviour
         MovementController.SetVerticalVelocity(newYVelocity);
     }
 
+    public void WallJumpHorizontal(float _time, int _dir)
+    {
+        float newVelocityX = _dir * Stats.wallJumpHorizontalCurve.Evaluate(_time) * Stats.wallJumpHorizontalSpeed;
+        MovementController.SetHorizontalVelocity(newVelocityX);
+    }
+
     public void RemoveJump()
     {
         _jumpsLeft--;
@@ -213,6 +244,30 @@ public class CharacterController : MonoBehaviour
         InputData.AddGetHit(_damage);
 
         ChangeState(GetHitState);
+    }
+
+    public void SetCheckpoint(Checkpoint _checkpoint)
+    {
+        if (CurrentCheckpoint == _checkpoint)
+        {
+            return;
+        }
+
+        if (CurrentCheckpoint != null)
+        {
+            CurrentCheckpoint.Activate(false);
+        }
+
+        CurrentCheckpoint = _checkpoint;
+        CurrentCheckpoint.Activate();
+    }
+
+    public void OnRespawn()
+    {
+        if (CurrentCheckpoint)
+            transform.position = CurrentCheckpoint.SpawnPoint.position;
+
+        RigidBody.velocity = Vector2.zero;
     }
 
     public void OnJump(InputAction.CallbackContext _context)
@@ -261,6 +316,11 @@ public class CharacterController : MonoBehaviour
                 Gizmos.color = Color.red;
 
             Gizmos.DrawWireCube(_groundCheck.position, _settings.groundCheckSize);
+
+            Gizmos.color = Color.yellow;
+
+            Gizmos.DrawWireCube(_wallCheckLeft.position, _settings.wallCheckSize);
+            Gizmos.DrawWireCube(_wallCheckRight.position, _settings.wallCheckSize);
 
             // Draw an arrow to show the length and direction of the movement
 
