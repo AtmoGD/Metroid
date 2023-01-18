@@ -20,9 +20,11 @@ public class SectionController : MonoBehaviour
         active = false;
 
         virtualCamera.gameObject.SetActive(false);
+
+        characterController.Player.OnChangeForm -= UpdateCharacterController;
     }
 
-    public void OnPlayerEnter(CharacterController characterController)
+    public void OnPlayerEnter(CharacterController _characterController)
     {
         if (active)
             return;
@@ -35,8 +37,16 @@ public class SectionController : MonoBehaviour
 
         virtualCamera.gameObject.SetActive(true);
 
-        virtualCamera.Follow = characterController.transform;
-        virtualCamera.LookAt = characterController.transform;
+        UpdateCharacterController(_characterController);
+
+        characterController.Player.OnChangeForm += UpdateCharacterController;
+    }
+
+    public void UpdateCharacterController(CharacterController _characterController)
+    {
+        this.characterController = _characterController;
+        virtualCamera.Follow = _characterController.transform;
+        virtualCamera.LookAt = _characterController.transform;
     }
 
     public void ActivateNeighbourSections(bool activate, SectionController excludeSection = null)

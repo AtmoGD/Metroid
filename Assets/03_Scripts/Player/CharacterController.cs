@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
     [Header("Debugging")]
     [SerializeField] private bool _debug = false;
 
+    public PlayerController Player { get; private set; } = null;
     public MovementController MovementController { get; private set; } = null;
     public AttackController AttackController { get; private set; } = null;
     public PlayerInput PlayerInput { get; private set; } = null;
@@ -25,8 +27,16 @@ public class CharacterController : MonoBehaviour
     public CharacterAttack AttackState { get; private set; } = null;
     public CharacterGetHit GetHitState { get; private set; } = null;
     public CharacterDash DashState { get; private set; } = null;
+    public CharacterChargeTime ChargeTimeState { get; private set; } = null;
+
 
     [Header("References")]
+    // [SerializeField] private GameObject _baseForm = null;
+    // public GameObject BaseForm => _baseForm;
+    // [SerializeField] private GameObject _fireForm = null;
+    // public GameObject FireForm => _fireForm;
+    [SerializeField] private Animator _chooseElementAnimator = null;
+    public Animator ChooseElementAnimator => _chooseElementAnimator;
     [SerializeField] private Transform _groundCheck = null;
     public Transform GroundCheck => _groundCheck;
     [SerializeField] private Transform _wallCheckLeft = null;
@@ -60,6 +70,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private int _dashesLeft = 0;
     public int DashesLeft => _dashesLeft;
     public bool CanDash => DashesLeft > 0;
+    public float targetTime = 1f;
 
     public bool IsGrounded
     {
@@ -99,6 +110,7 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
+        Player = GetComponentInParent<PlayerController>();
         MovementController = GetComponent<MovementController>();
         AttackController = GetComponent<AttackController>();
         PlayerInput = GetComponent<PlayerInput>();
@@ -114,6 +126,7 @@ public class CharacterController : MonoBehaviour
         AttackState = new CharacterAttack(this);
         GetHitState = new CharacterGetHit(this);
         DashState = new CharacterDash(this);
+        ChargeTimeState = new CharacterChargeTime(this);
     }
 
     private void Start()
@@ -124,6 +137,8 @@ public class CharacterController : MonoBehaviour
     private void Update()
     {
         CurrentState.FrameUpdate();
+
+
     }
 
     private void FixedUpdate()
@@ -141,6 +156,11 @@ public class CharacterController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         InputData.SetMove(context.ReadValue<Vector2>());
+    }
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        InputData.SetAim(context.ReadValue<Vector2>());
     }
 
     public void MoveHorizontal(float _time)
@@ -241,7 +261,7 @@ public class CharacterController : MonoBehaviour
     public void OnGetHit(Damage _damage)
     {
         InputData.SetGetHit(true);
-        InputData.AddGetHit(_damage);
+        InputData.AddGetHit(_damage); // <--- What?!?!
 
         ChangeState(GetHitState);
     }
@@ -304,6 +324,14 @@ public class CharacterController : MonoBehaviour
         {
             InputData.SetDash(false);
         }
+    }
+
+    public void OnChargeTime(InputAction.CallbackContext _context)
+    {
+        float val = 1 - _context.ReadValue<float>();
+
+        targetTime = Mathf.Clamp(val, Stats.chargeScaleMin, Stats.chargeScaleMax);
+        print(val);
     }
 
     private void OnDrawGizmos()

@@ -54,6 +54,12 @@ public class CharacterIdle : CharacterState
             return;
         }
 
+        if (Controller.targetTime != Time.timeScale)
+        {
+            Controller.ChangeState(Controller.ChargeTimeState);
+            return;
+        }
+
 
     }
 

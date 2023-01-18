@@ -81,39 +81,40 @@ public class CharacterDash : CharacterState
         }
         else
         {
-            if (Controller.Stats.directionType == DirectionType.Four)
-            {
+            return Utils.GetDirectionClamped(dir, Controller.Stats.directionType, Controller.Stats.dirThreshold);
+            // if (Controller.Stats.directionType == DirectionType.Four)
+            // {
 
-                if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-                {
-                    return dir.x > 0f ? Vector2.right : Vector2.left;
-                }
-                else
-                {
-                    return dir.y > 0f ? Vector2.up : Vector2.down;
-                }
-            }
-            else if (Controller.Stats.directionType == DirectionType.Eight)
-            {
-                Vector2 dir8 = Vector2.zero;
-                dir8.x = Mathf.Abs(dir.x) > Controller.Stats.dirThreshold ? dir.x > 0f ? 1 : -1 : 0f;
-                dir8.y = Mathf.Abs(dir.y) > Controller.Stats.dirThreshold ? dir.y > 0f ? 1 : -1 : 0f;
-                return dir8;
-            }
-            else if (Controller.Stats.directionType == DirectionType.Vertical)
-            {
-                float dirY = Mathf.Abs(dir.y) > Controller.Stats.dirThreshold ? dir.y > 0f ? 1 : -1 : 0f;
-                return new Vector2(0f, dirY);
-            }
-            else if (Controller.Stats.directionType == DirectionType.Horizontal)
-            {
-                float dirX = Mathf.Abs(dir.x) > Controller.Stats.dirThreshold ? dir.x > 0f ? 1 : -1 : 0f;
-                return new Vector2(dirX, 0f);
-            }
-            else
-            {
-                return Vector2.zero;
-            }
+            //     if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            //     {
+            //         return dir.x > 0f ? Vector2.right : Vector2.left;
+            //     }
+            //     else
+            //     {
+            //         return dir.y > 0f ? Vector2.up : Vector2.down;
+            //     }
+            // }
+            // else if (Controller.Stats.directionType == DirectionType.Eight)
+            // {
+            //     Vector2 dir8 = Vector2.zero;
+            //     dir8.x = Mathf.Abs(dir.x) > Controller.Stats.dirThreshold ? dir.x > 0f ? 1 : -1 : 0f;
+            //     dir8.y = Mathf.Abs(dir.y) > Controller.Stats.dirThreshold ? dir.y > 0f ? 1 : -1 : 0f;
+            //     return dir8;
+            // }
+            // else if (Controller.Stats.directionType == DirectionType.Vertical)
+            // {
+            //     float dirY = Mathf.Abs(dir.y) > Controller.Stats.dirThreshold ? dir.y > 0f ? 1 : -1 : 0f;
+            //     return new Vector2(0f, dirY);
+            // }
+            // else if (Controller.Stats.directionType == DirectionType.Horizontal)
+            // {
+            //     float dirX = Mathf.Abs(dir.x) > Controller.Stats.dirThreshold ? dir.x > 0f ? 1 : -1 : 0f;
+            //     return new Vector2(dirX, 0f);
+            // }
+            // else
+            // {
+            //     return Vector2.zero;
+            // }
         }
     }
 }

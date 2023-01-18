@@ -60,6 +60,12 @@ public class CharacterMove : CharacterState
             return;
         }
 
+        if (Controller.targetTime != Time.timeScale)
+        {
+            Controller.ChangeState(Controller.ChargeTimeState);
+            return;
+        }
+
         Controller.MoveHorizontal(TimeInState);
     }
 

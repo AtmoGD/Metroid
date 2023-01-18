@@ -11,6 +11,19 @@ public enum DirectionType
     Eight
 }
 
+public enum Direction
+{
+    Up,
+    UpRight,
+    Right,
+    RightDown,
+    Down,
+    DownLeft,
+    Left,
+    LeftUp,
+    None
+}
+
 [Serializable]
 public class CharacterStats
 {
@@ -35,4 +48,8 @@ public class CharacterStats
     public bool continiousDashing = true;
     public DirectionType directionType = DirectionType.Four;
     public float dirThreshold = 0.25f;
+    public float chargeSpeed = 1f;
+    public float chargeScaleMin = 0.2f;
+    public float chargeScaleMax = 1f;
+    public float chargeTime = 1f;
 }

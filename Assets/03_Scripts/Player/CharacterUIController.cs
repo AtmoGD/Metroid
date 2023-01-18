@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class CharacterUIController : MonoBehaviour
 {
-    [SerializeField] private HealthController healthController;
+    // [SerializeField] private HealthController healthController;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject hearthContainer;
     [SerializeField] private GameObject hearthPrefab;
 
@@ -23,7 +24,7 @@ public class CharacterUIController : MonoBehaviour
 
     public void CreateHearts()
     {
-        for (int i = 0; i < healthController.MaxHealth; i++)
+        for (int i = 0; i < playerController.MaxLifes; i++)
         {
             GameObject hearth = Instantiate(hearthPrefab, hearthContainer.transform);
             hearths.Add(hearth);
@@ -34,7 +35,7 @@ public class CharacterUIController : MonoBehaviour
     {
         for (int i = 0; i < hearths.Count; i++)
         {
-            if (i < healthController.CurrentHealth)
+            if (i < playerController.CurrentLifes)
             {
                 hearths[i].SetActive(true);
             }

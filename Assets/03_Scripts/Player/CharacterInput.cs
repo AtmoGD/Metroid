@@ -7,6 +7,7 @@ using System;
 public class CharacterInput
 {
     [SerializeField] public Vector2 move = Vector2.zero;
+    [SerializeField] public Vector2 aim = Vector2.zero;
     [SerializeField] public bool jump = false;
     [SerializeField] public bool attack = false;
     [SerializeField] public bool getHit = false;
@@ -16,6 +17,11 @@ public class CharacterInput
     public void SetMove(Vector2 _move)
     {
         move = _move;
+    }
+
+    public void SetAim(Vector2 _aim)
+    {
+        aim = _aim;
     }
 
     public void SetJump(bool _jump)

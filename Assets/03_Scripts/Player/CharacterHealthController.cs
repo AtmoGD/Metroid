@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CharacterHealthController : HealthController
 {
-    [SerializeField] protected Animator LoadingScreenAnimator = null;
     private CharacterController characterController;
 
     private float immuneTime = 0.0f;
@@ -25,7 +24,9 @@ public class CharacterHealthController : HealthController
         if (immuneTime > 0.0f)
             return;
 
-        base.TakeDamage(damage);
+        // base.TakeDamage(damage);
+
+        characterController.Player.RemoveLife(damage.Amount);
 
         if (characterController)
         {
@@ -38,13 +39,13 @@ public class CharacterHealthController : HealthController
         }
     }
 
-    protected override void Die()
-    {
-        if (LoadingScreenAnimator)
-        {
-            LoadingScreenAnimator.SetTrigger("StartLoading");
-        }
-    }
+    // protected override void Die()
+    // {
+    //     if (LoadingScreenAnimator)
+    //     {
+    //         LoadingScreenAnimator.SetTrigger("StartLoading");
+    //     }
+    // }
 
     public void Respawn()
     {
@@ -52,11 +53,11 @@ public class CharacterHealthController : HealthController
         characterController.OnRespawn();
     }
 
-    public void StartEndLoading()
-    {
-        if (LoadingScreenAnimator)
-        {
-            LoadingScreenAnimator.SetTrigger("EndLoading");
-        }
-    }
+    // public void StartEndLoading()
+    // {
+    //     if (LoadingScreenAnimator)
+    //     {
+    //         LoadingScreenAnimator.SetTrigger("EndLoading");
+    //     }
+    // }
 }

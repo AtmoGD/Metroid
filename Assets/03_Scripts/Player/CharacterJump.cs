@@ -71,6 +71,12 @@ public class CharacterJump : CharacterState
                 Controller.ChangeState(Controller.DashState);
                 return;
             }
+
+            if (Controller.targetTime != Time.timeScale)
+            {
+                Controller.ChangeState(Controller.ChargeTimeState);
+                return;
+            }
         }
 
         Controller.Jump(TimeInState);
