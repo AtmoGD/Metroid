@@ -50,14 +50,16 @@ public class CharacterFall : CharacterState
             return;
         }
 
-        if (Controller.targetTime != Time.timeScale)
+        if (Controller.InputData.chargeTime && Controller.CanCharge)
         {
             Controller.ChangeState(Controller.ChargeTimeState);
             return;
         }
 
         Controller.Fall(TimeInState);
-        Controller.MoveHorizontal(TimeInState);
+
+        if (Controller.Stats.canMoveWhileFalling)
+            Controller.MoveHorizontal(TimeInState);
     }
 
 

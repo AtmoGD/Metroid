@@ -72,7 +72,7 @@ public class CharacterJump : CharacterState
                 return;
             }
 
-            if (Controller.targetTime != Time.timeScale)
+            if (Controller.InputData.chargeTime && Controller.CanCharge)
             {
                 Controller.ChangeState(Controller.ChargeTimeState);
                 return;
@@ -83,7 +83,7 @@ public class CharacterJump : CharacterState
 
         if (isWallJump)
             Controller.WallJumpHorizontal(TimeInState, wallJumpDirection);
-        else
+        else if (Controller.Stats.canMoveWhileJumping)
             Controller.MoveHorizontal(TimeInState);
     }
 

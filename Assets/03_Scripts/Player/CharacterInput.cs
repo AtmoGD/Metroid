@@ -13,6 +13,7 @@ public class CharacterInput
     [SerializeField] public bool getHit = false;
     [SerializeField] public List<Damage> damage = new List<Damage>();
     [SerializeField] public bool dash = false;
+    [SerializeField] public bool chargeTime = false;
 
     public void SetMove(Vector2 _move)
     {
@@ -47,5 +48,10 @@ public class CharacterInput
     public void SetDash(bool _dash)
     {
         dash = _dash;
+    }
+
+    public void SetChargeTime(bool _chargeTime)
+    {
+        chargeTime = _chargeTime;
     }
 }

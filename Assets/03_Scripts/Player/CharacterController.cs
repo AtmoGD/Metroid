@@ -14,9 +14,9 @@ public class CharacterController : MonoBehaviour
     public AttackController AttackController { get; private set; } = null;
     public PlayerInput PlayerInput { get; private set; } = null;
     public Rigidbody2D RigidBody { get; private set; } = null;
-    public Animator Animator { get; private set; } = null;
+    // public Animator Animator { get; private set; } = null;
 
-    public Checkpoint CurrentCheckpoint { get; private set; } = null;
+    // public Checkpoint CurrentCheckpoint { get; private set; } = null;
 
     private CharacterState CurrentState { get; set; } = null;
     public CharacterIdle IdleState { get; private set; } = null;
@@ -37,6 +37,8 @@ public class CharacterController : MonoBehaviour
     // public GameObject FireForm => _fireForm;
     [SerializeField] private Animator _chooseElementAnimator = null;
     public Animator ChooseElementAnimator => _chooseElementAnimator;
+    [SerializeField] private Animator _loadingScreenAnimator = null;
+    public Animator LoadingScreenAnimator => _loadingScreenAnimator;
     [SerializeField] private Transform _groundCheck = null;
     public Transform GroundCheck => _groundCheck;
     [SerializeField] private Transform _wallCheckLeft = null;
@@ -70,7 +72,13 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private int _dashesLeft = 0;
     public int DashesLeft => _dashesLeft;
     public bool CanDash => DashesLeft > 0;
-    public float targetTime = 1f;
+
+    [SerializeField] private string _chargeCooldownName = "ChargeCooldown";
+    public string ChargeCooldownName => _chargeCooldownName;
+    [SerializeField] private float _chargeCooldownDuration = 0f;
+    public float ChargeCooldownDuration => _chargeCooldownDuration;
+    public bool CanCharge => Player.Cooldowns.FindAll(x => x.name == ChargeCooldownName).Count == 0;
+    // public float targetTime = 1f;
 
     public bool IsGrounded
     {
@@ -116,7 +124,7 @@ public class CharacterController : MonoBehaviour
         PlayerInput = GetComponent<PlayerInput>();
 
         RigidBody = GetComponent<Rigidbody2D>();
-        Animator = GetComponent<Animator>();
+        // Animator = GetComponent<Animator>();
 
         IdleState = new CharacterIdle(this);
         MoveState = new CharacterMove(this);
@@ -266,28 +274,40 @@ public class CharacterController : MonoBehaviour
         ChangeState(GetHitState);
     }
 
-    public void SetCheckpoint(Checkpoint _checkpoint)
-    {
-        if (CurrentCheckpoint == _checkpoint)
-        {
-            return;
-        }
+    // public void SetCheckpoint(Checkpoint _checkpoint)
+    // {
+    //     if (CurrentCheckpoint == _checkpoint)
+    //     {
+    //         return;
+    //     }
 
-        if (CurrentCheckpoint != null)
-        {
-            CurrentCheckpoint.Activate(false);
-        }
+    //     if (CurrentCheckpoint != null)
+    //     {
+    //         CurrentCheckpoint.Activate(false);
+    //     }
 
-        CurrentCheckpoint = _checkpoint;
-        CurrentCheckpoint.Activate();
-    }
+    //     CurrentCheckpoint = _checkpoint;
+    //     CurrentCheckpoint.Activate();
+    // }
 
     public void OnRespawn()
     {
-        if (CurrentCheckpoint)
-            transform.position = CurrentCheckpoint.SpawnPoint.position;
+        // if (CurrentCheckpoint)
+        //     transform.position = CurrentCheckpoint.SpawnPoint.position;
 
         RigidBody.velocity = Vector2.zero;
+        _loadingScreenAnimator.SetTrigger("StartLoading");
+    }
+
+    public void Respawn()
+    {
+        if (Player.CurrentCheckpoint)
+        {
+            transform.position = Player.CurrentCheckpoint.SpawnPoint.position;
+            Player.CurrentCheckpoint.Section.OnPlayerEnter(this);
+        }
+
+        _loadingScreenAnimator.SetTrigger("EndLoading");
     }
 
     public void OnJump(InputAction.CallbackContext _context)
@@ -328,10 +348,12 @@ public class CharacterController : MonoBehaviour
 
     public void OnChargeTime(InputAction.CallbackContext _context)
     {
-        float val = 1 - _context.ReadValue<float>();
+        bool val = _context.ReadValue<float>() > 0;
+        InputData.SetChargeTime(val);
+        // float val = 1 - _context.ReadValue<float>();
 
-        targetTime = Mathf.Clamp(val, Stats.chargeScaleMin, Stats.chargeScaleMax);
-        print(val);
+        // targetTime = Mathf.Clamp(val, Stats.chargeScaleMin, Stats.chargeScaleMax);
+        // print(val);
     }
 
     private void OnDrawGizmos()

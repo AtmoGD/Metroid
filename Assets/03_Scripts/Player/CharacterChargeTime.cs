@@ -29,9 +29,11 @@ public class CharacterChargeTime : CharacterState
 
         Time.timeScale = 1f;
 
-        Controller.targetTime = 1f;
+        // Controller.targetTime = 1f;
 
         Controller.ChooseElementAnimator.SetBool("IsVisible", false);
+
+        Controller.Player.Cooldowns.Add(new Cooldown(Controller.ChargeCooldownName, Controller.ChargeCooldownDuration));
     }
 
     public override void FrameUpdate()
@@ -40,6 +42,8 @@ public class CharacterChargeTime : CharacterState
 
         if (Controller.InputData.aim.magnitude > 0.5f)
             lastAim = Utils.GetDirectionClamped(Controller.InputData.aim, DirectionType.Four);
+
+        float targetTime = Controller.InputData.chargeTime ? Controller.Stats.chargeScaleMin : Controller.Stats.chargeScaleMax;
 
         Controller.ChooseElementAnimator.SetFloat("AimX", lastAim.x);
         Controller.ChooseElementAnimator.SetFloat("AimY", lastAim.y);
@@ -52,7 +56,7 @@ public class CharacterChargeTime : CharacterState
             return;
         }
 
-        if (Controller.targetTime == 1f)
+        if (targetTime == 1f)
         {
             if (lastAim.magnitude < 0.5f)
             {
@@ -82,7 +86,7 @@ public class CharacterChargeTime : CharacterState
             Controller.ChangeState(Controller.IdleState);
         }
 
-        Time.timeScale = Mathf.Lerp(Time.timeScale, Controller.targetTime, Controller.Stats.chargeSpeed * Time.deltaTime);
+        Time.timeScale = Mathf.Lerp(Time.timeScale, targetTime, Controller.Stats.chargeSpeed * Time.deltaTime);
     }
 
 

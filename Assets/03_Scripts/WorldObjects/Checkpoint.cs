@@ -8,6 +8,12 @@ public class Checkpoint : MonoBehaviour
     [field: SerializeField] public Transform SpawnPoint { get; private set; } = null;
 
     public bool IsActivated { get; private set; } = false;
+    public SectionController Section { get; private set; } = null;
+
+    private void Awake()
+    {
+        Section = GetComponentInParent<SectionController>();
+    }
 
     public void Activate(bool activate = true)
     {
@@ -24,7 +30,7 @@ public class Checkpoint : MonoBehaviour
         CharacterController controller = other.GetComponent<CharacterController>();
         if (controller != null)
         {
-            controller.SetCheckpoint(this);
+            controller.Player.SetCheckpoint(this);
         }
     }
 }

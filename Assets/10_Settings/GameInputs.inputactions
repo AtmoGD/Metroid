@@ -261,6 +261,17 @@
                 },
                 {
                     "name": "",
+                    "id": "02225115-a240-4311-ae6b-4930040c41c0",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChargeTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "61ab1c01-c675-4229-90ec-e05695e20018",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",

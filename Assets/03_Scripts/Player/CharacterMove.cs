@@ -60,7 +60,7 @@ public class CharacterMove : CharacterState
             return;
         }
 
-        if (Controller.targetTime != Time.timeScale)
+        if (Controller.InputData.chargeTime && Controller.CanCharge)
         {
             Controller.ChangeState(Controller.ChargeTimeState);
             return;

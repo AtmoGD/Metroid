@@ -36,6 +36,8 @@ public class CharacterStats
     public AnimationCurve wallJumpHorizontalCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public float wallJumpHorizontalSpeed = 2f;
     public AnimationCurve fallCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    public bool canMoveWhileJumping = true;
+    public bool canMoveWhileFalling = true;
     public float attackTime = 0.2f;
     public AnimationCurve attackXCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public AnimationCurve attackYCurve = AnimationCurve.Linear(0, 0, 1, 1);

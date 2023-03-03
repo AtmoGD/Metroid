@@ -4,6 +4,18 @@ using UnityEngine;
 using Cinemachine;
 using System;
 
+public class Cooldown
+{
+    public Cooldown(string _name, float _duration)
+    {
+        name = _name;
+        duration = _duration;
+    }
+
+    public string name;
+    public float duration;
+}
+
 public class PlayerController : MonoBehaviour
 {
     public Action<CharacterController> OnChangeForm;
@@ -15,12 +27,50 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController airForm;
     [field: SerializeField] public int MaxLifes { get; private set; } = 3;
     [field: SerializeField] public int CurrentLifes { get; private set; } = 3;
+    [field: SerializeField] public List<Cooldown> Cooldowns { get; set; } = new List<Cooldown>();
 
     private CharacterController currentForm;
+    public CharacterController CurrentForm => currentForm;
 
-    private void Start()
+    public Checkpoint CurrentCheckpoint { get; private set; } = null;
+
+    private void Awake()
     {
         currentForm = baseForm;
+    }
+
+    private void Update()
+    {
+        UpdateCooldowns();
+    }
+
+    public void UpdateCooldowns()
+    {
+        for (int i = 0; i < Cooldowns.Count; i++)
+        {
+            Cooldowns[i].duration -= Time.deltaTime;
+            if (Cooldowns[i].duration <= 0)
+            {
+                Cooldowns.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
+    public void SetCheckpoint(Checkpoint _checkpoint)
+    {
+        if (CurrentCheckpoint == _checkpoint)
+        {
+            return;
+        }
+
+        if (CurrentCheckpoint != null)
+        {
+            CurrentCheckpoint.Activate(false);
+        }
+
+        CurrentCheckpoint = _checkpoint;
+        CurrentCheckpoint.Activate();
     }
 
     public void ChangeForm(CharacterForm form)

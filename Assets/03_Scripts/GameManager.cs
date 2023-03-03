@@ -13,8 +13,8 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private PlayerInput characterInput;
+    // [SerializeField] private CharacterController characterController;
+    [SerializeField] private PlayerController Player;
     [SerializeField] private UIController uiController;
     [SerializeField] private PlayerInput uiInput;
     [SerializeField] private SectionController startSection;
@@ -33,16 +33,16 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-        // SetCurrentSection(currentSection);
         currentSection = null;
 
         startSection.gameObject.SetActive(true);
-        characterController.gameObject.SetActive(true);
-        startSection.OnPlayerEnter(characterController);
+        Player.CurrentForm.gameObject.SetActive(true);
+        // characterController.gameObject.SetActive(true);
+        startSection.OnPlayerEnter(Player.CurrentForm);
+        // startSection.OnPlayerEnter(characterController);
 
 
         uiInput.DeactivateInput();
-        characterInput.ActivateInput();
     }
 
     public void OnPauseGame(InputAction.CallbackContext context)
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameState = GameState.Paused;
         uiController.OpenPauseMenu();
-        characterInput.DeactivateInput();
+        Player.CurrentForm.PlayerInput.DeactivateInput();
         uiInput.ActivateInput();
     }
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameState = GameState.Playing;
-        characterInput.ActivateInput();
+        Player.CurrentForm.PlayerInput.ActivateInput();
         uiInput.DeactivateInput();
     }
 
